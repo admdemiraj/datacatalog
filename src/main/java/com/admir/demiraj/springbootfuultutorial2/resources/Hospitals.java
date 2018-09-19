@@ -5,13 +5,13 @@
  */
 package com.admir.demiraj.springbootfuultutorial2.resources;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import java.io.Serializable;
-import java.util.Set;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,13 +29,25 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @EntityListeners(AuditingEntityListener.class)
 public class Hospitals {
+
+    public Hospitals(String name) {
+        this.name = name;
+    }
+
+    public Hospitals() {
+    }
+    
+    
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long hospital_id;
     
     @NotBlank
     private String name;
   
+    @OneToMany(mappedBy="hospital",fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private List<Variables> variables;
     
     public Long getId() {
         return hospital_id;
@@ -51,6 +63,22 @@ public class Hospitals {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Long getHospital_id() {
+        return hospital_id;
+    }
+
+    public void setHospital_id(Long hospital_id) {
+        this.hospital_id = hospital_id;
+    }
+ 
+    public List<Variables> getVariables() {
+        return variables;
+    }
+
+    public void setVariables(List<Variables> variables) {
+        this.variables = variables;
     }
 
     

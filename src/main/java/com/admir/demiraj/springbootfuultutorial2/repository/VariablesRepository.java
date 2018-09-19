@@ -7,11 +7,9 @@ package com.admir.demiraj.springbootfuultutorial2.repository;
 
 import com.admir.demiraj.springbootfuultutorial2.resources.Variables;
 import java.util.List;
-import java.util.Optional;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 /**
  *
@@ -19,10 +17,32 @@ import org.springframework.stereotype.Repository;
  */
 public interface VariablesRepository extends JpaRepository<Variables, Long>{
     
-    //public Page<Variables> findById(Long hospitalsId, Pageable pageable);
     
-    public Optional<Variables> findById(Long hospital_id);
+    @Query(value = "SELECT * FROM variables v "
+            + "INNER JOIN variables_versions vv ON v.variable_id = vv.variable_id "
+            + "INNER JOIN versions ver ON ver.version_id = vv.version_id"
+            + "WHERE vv.version_id = version_id AND v.hospital.hospital_id = hospital_id",nativeQuery=true)
+    public List<Variables> findVariablesByHospitalIdAndVersion(@Param("hospital_id")Long hospitalId, @Param("version_id")Long versionId);
     
-    public Optional<Variables> findByHospitalid(Long hospital_id);
+    // I may need to select the functions as well in order to print one mapping for each one of them
+    @Query(value= "SELECT * FROM variables v"
+            + "INNER JOIN variables_functions vf ON v.variable_id = vf.variable_id"
+            + "INNER JOIN functions f ON vf.function_id = f.function_id"
+            //+ "INNER JOIN cdevariables cv ON cv.function_id = f.function_id"
+            + "WHERE v.variable_id = ?1 ", nativeQuery=true )
+    public List<Variables> variablesToCdeVariables( Long variableId);
+    
+    @Query(value = "select * from variables where variables.hospital_id = ?1", nativeQuery=true) 
+    public List<Variables> findByHospitalid(Long hospitalId);
+    
+    @Query("select v.hospital.hospital_id from #{#entityName} v where v.variable_id = ?1 ")
+    public Long findHospitalIdByVariableId(Long variableId);
+    
+    @Query(value = "select * from variables where name=?1",nativeQuery = true)
+    public List<Variables> findByVariableName(String variableName);
+    
+    
+    
+   
     
 }

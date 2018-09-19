@@ -33,7 +33,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
+    
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -55,6 +55,16 @@
   
 
 	 </dependency>
+	 <dependency>
+
+  <groupId>org.postgresql</groupId>
+
+  <artifactId>postgresql</artifactId>
+  
+
+
+
+</dependency> 
 	</dependencies>
 
 	<build>
@@ -62,6 +72,11 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+                                <configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<compilerArgument>-parameters</compilerArgument>
+</configuration>
 			</plugin>
 		</plugins>
 	</build>
