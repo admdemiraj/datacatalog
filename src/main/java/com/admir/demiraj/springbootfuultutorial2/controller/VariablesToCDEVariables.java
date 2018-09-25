@@ -5,10 +5,12 @@
  */
 package com.admir.demiraj.springbootfuultutorial2.controller;
 
+import com.admir.demiraj.springbootfuultutorial2.dao.CDEVariableDAO;
 import com.admir.demiraj.springbootfuultutorial2.dao.FunctionsDAO;
 import com.admir.demiraj.springbootfuultutorial2.dao.HospitalDAO;
 import com.admir.demiraj.springbootfuultutorial2.dao.VariableDAO;
 import com.admir.demiraj.springbootfuultutorial2.dao.VersionDAO;
+import com.admir.demiraj.springbootfuultutorial2.resources.CDEVariables;
 import com.admir.demiraj.springbootfuultutorial2.resources.Functions;
 import com.admir.demiraj.springbootfuultutorial2.resources.Hospitals;
 import com.admir.demiraj.springbootfuultutorial2.resources.Variables;
@@ -28,6 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/mapping")
 public class VariablesToCDEVariables {
+
     @Autowired
     private VariableDAO variableDAO;
     
@@ -39,6 +42,9 @@ public class VariablesToCDEVariables {
     
    @Autowired
    private FunctionsDAO functionsDAO;
+   
+   @Autowired
+   private CDEVariableDAO cdeVariableDAO;
    
    
    @PostMapping("/variables/{variable_id}")
@@ -60,10 +66,18 @@ public class VariablesToCDEVariables {
         
         ///// CASE 1: One function for multiple variables //////// 
         Functions function1 = new Functions("turn 0 to F, turn 1 to M","rule description 1");
+        CDEVariables cdeVariable = new CDEVariables("cd1", "file1", null, null, null, null, null, null);
+        
+        //function1.setCdeVariable(cdeVariable);
         functionsDAO.save(function1);
+        cdeVariable.setFunction(function1);
+        cdeVariableDAO.save(cdeVariable);
+        
+        
         
         for(int i=0;i<3;i++){
-        Variables var = new Variables("variable "+i+3,"variable description "+i+3,"type "+i+3);
+        Variables var = new Variables("name"+i, "hbp", null, "text", null, "NOT NULL",
+                null, null);
         variableDAO.saveVersionToVariable(var, ver);
         variableDAO.saveHospitalToVariable(var, hosp);
         variableDAO.saveFunctionToVariable(var, function1);
@@ -73,12 +87,25 @@ public class VariablesToCDEVariables {
         ///// CASE 2: Two functions for one variable //////// 
         
         Functions function2 = new Functions("turn 1 to 2","rule description 2");
+        CDEVariables cdeVariable2 = new CDEVariables("cd2", "file2", null, null, null, null, null, null);
+        
+        //function2.setCdeVariable(cdeVariable2);
         functionsDAO.save(function2);
+        cdeVariable2.setFunction(function2);
+        cdeVariableDAO.save(cdeVariable2);
+        
         
         Functions function3 = new Functions("turn 2 to 3","rule description 3");
-        functionsDAO.save(function3);
+        CDEVariables cdeVariable3 = new CDEVariables("cd3", "file3", null, null, null, null, null, null);
         
-        Variables var2 = new Variables("variable2 ","variable description2 ","type2 ");
+        //function3.setCdeVariable(cdeVariable3);
+        functionsDAO.save(function3);
+        cdeVariable3.setFunction(function3);
+        cdeVariableDAO.save(cdeVariable3);
+        
+        
+        Variables var2 = new Variables("name", "hbp", null, "text", null, "NOT NULL",
+                null, null);
         variableDAO.saveVersionToVariable(var2, ver);
         variableDAO.saveHospitalToVariable(var2, hosp);
         variableDAO.saveFunctionToVariable(var2, function2);

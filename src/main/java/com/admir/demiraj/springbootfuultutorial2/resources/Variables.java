@@ -10,18 +10,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -35,11 +24,31 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @EntityListeners(AuditingEntityListener.class)
 public class Variables implements Serializable{
 
-    public Variables(String name, String description, String type) {
+    public Variables(@NotBlank String name, @NotBlank String csvFile, String value, String type, String unit, String canBeNull,
+                     String description, String comments) {
         this.name = name;
-        this.description = description;
+        this.csvFile = csvFile;
+        this.value = value;
         this.type = type;
+        this.unit = unit;
+        this.canBeNull = canBeNull;
+        this.description = description;
+        this.comments = comments;
+
     }
+
+    /**
+ *
+ *  public Variables(String name, String description, String type) {
+ *         this.name = name;
+ *         this.description = description;
+ *         this.type = type;
+ *     }
+ *
+ *
+ *
+ * */
+
 
     public Variables() {
     }
@@ -52,14 +61,29 @@ public class Variables implements Serializable{
     
     @NotBlank
     private String name;
-    
+
     @NotBlank
-    private String description;
-    
-    @NotBlank
+    private String csvFile;
+
+    @Column
+    private String value;
+
+    @Column
     private String type;
 
+    @Column
+    private String unit;
+
+    @Column
+    private String canBeNull;
     
+    @Column
+    private String description;
+
+    @Column
+    private String comments;
+    
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "hospital_id", nullable = false) 
     @JsonBackReference
@@ -75,6 +99,8 @@ public class Variables implements Serializable{
     @JoinTable(name = "variables_versions",joinColumns = { @JoinColumn(name = "variable_id") },inverseJoinColumns = { @JoinColumn(name = "version_id") })
     private Set<Versions> versions = new HashSet<>();
 
+
+
     public Set<Versions> getVersions() {
         return versions;
     }
@@ -83,16 +109,6 @@ public class Variables implements Serializable{
         this.versions.add(version);
     }
 
-    public Long getVariable_id() {
-        return variable_id;
-    }
-
-    public void setVariable_id(Long variable_id) {
-        this.variable_id = variable_id;
-    }
-    
-    
-   
     public String getName() {
         return name;
     }
@@ -133,8 +149,59 @@ public class Variables implements Serializable{
         this.function.add(function);
     }
 
-   
-    
-    
-    
+    public Long getVariable_id() {
+        return variable_id;
+    }
+
+    public void setVariable_id(Long variable_id) {
+        this.variable_id = variable_id;
+    }
+
+    public String getCsvFile() {
+        return csvFile;
+    }
+
+    public void setCsvFile(String csvFile) {
+        this.csvFile = csvFile;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
+
+    public String getCanBeNull() {
+        return canBeNull;
+    }
+
+    public void setCanBeNull(String canBeNull) {
+        this.canBeNull = canBeNull;
+    }
+
+    public String getComments() {
+        return comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
+
+    public void setFunction(Set<Functions> function) {
+        this.function = function;
+    }
+
+    public void setVersions(Set<Versions> versions) {
+        this.versions = versions;
+    }
 }

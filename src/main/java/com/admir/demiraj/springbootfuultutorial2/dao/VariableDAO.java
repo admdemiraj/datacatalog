@@ -40,30 +40,23 @@ public class VariableDAO {
     public void saveFunctionToVariable(Variables var, Functions function){
     var.setFunction(function);
     }
-    public void saveHospitalToVariable(Variables var, Hospitals hosp){
-        var.setHospital(hosp);
-   
-    }
+    public void saveHospitalToVariable(Variables var, Hospitals hosp){ var.setHospital(hosp); }
+
     /**
      Method that given a variableId returns all the possible mappings that the 
      * variable may have in the creation of CDEVariables
      */
     public List<Variables> variablesToCdeVariables(Long variableId){
         return variablesRepository.variablesToCdeVariables(variableId);
-    
     }
     
-    
     //find variable by hospital id
-    
    public List<Variables> getVariableByHospitalId(Long HospitalId){
         return variablesRepository.findByHospitalid(HospitalId);
    } 
  
    public List<Variables> getVariablesByHospitalIdAndVersionId(Long hospitalId, Long versionId){
        List<Variables> allVariables = variablesRepository.findByHospitalid(hospitalId);
-       //test
-       //List<Variables> allVariables = variablesRepository.findByVariableName("var4");
        List<Variables> variablesByVersion = new ArrayList();
    
        for(Variables v : allVariables){
@@ -86,7 +79,6 @@ public class VariableDAO {
     
     
     //show all variables
-    
     public List<Variables> findAll(){
         return variablesRepository.findAll();
     }
@@ -95,9 +87,9 @@ public class VariableDAO {
     public Variables getVariable(Long id){
         return variablesRepository.getOne(id);
     }
-    
+
     //delete a variable given it's id
-   public void deleteVariable(long id){
+    public void deleteVariable(long id){
        variablesRepository.deleteById(id);
    }
     

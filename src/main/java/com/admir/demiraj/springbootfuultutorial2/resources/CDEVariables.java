@@ -10,18 +10,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -35,10 +24,15 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @EntityListeners(AuditingEntityListener.class)
 public class CDEVariables{
 
-    public CDEVariables(String name, String description, String type) {
+    public CDEVariables(@NotBlank String name, @NotBlank String csvFile, String value, String type, String unit, String canBeNull, String description, String comments) {
         this.name = name;
-        this.description = description;
+        this.csvFile = csvFile;
+        this.value = value;
         this.type = type;
+        this.unit = unit;
+        this.canBeNull = canBeNull;
+        this.description = description;
+        this.comments = comments;
     }
 
     public CDEVariables() {
@@ -49,15 +43,30 @@ public class CDEVariables{
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long cdevariable_id;
-    
+
     @NotBlank
     private String name;
-    
+
     @NotBlank
-    private String description;
-    
-    @NotBlank
+    private String csvFile;
+
+    @Column
+    private String value;
+
+    @Column
     private String type;
+
+    @Column
+    private String unit;
+
+    @Column
+    private String canBeNull;
+
+    @Column
+    private String description;
+
+    @Column
+    private String comments;
     
     @JsonBackReference
     @ManyToMany(fetch = FetchType.LAZY,cascade =  {CascadeType.PERSIST,CascadeType.MERGE})
@@ -92,9 +101,50 @@ public class CDEVariables{
     public void setVersions(Versions versions) {
         this.versions.add(versions);
     }
- 
 
-   
+    public String getCsvFile() {
+        return csvFile;
+    }
+
+    public void setCsvFile(String csvFile) {
+        this.csvFile = csvFile;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
+
+    public String getCanBeNull() {
+        return canBeNull;
+    }
+
+    public void setCanBeNull(String canBeNull) {
+        this.canBeNull = canBeNull;
+    }
+
+    public String getComments() {
+        return comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
+
+    public void setVersions(Set<Versions> versions) {
+        this.versions = versions;
+    }
 
     public String getName() {
         return name;
