@@ -17,10 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotBlank;
 
@@ -28,6 +25,7 @@ import javax.validation.constraints.NotBlank;
  * @author root
  */
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/hospital")
 public class VersionsVariablesController {
 
@@ -46,6 +44,15 @@ public class VersionsVariablesController {
                                                                @PathVariable(value = "version_id") Long versionId) {
         return variableDAO.getVariablesByHospitalIdAndVersionId(hospitalId, versionId);
     }
+
+    @GetMapping("/allVariables")
+    public List<Variables> getAllVariables(){
+        return variableDAO.findAll();
+    }
+
+    @GetMapping("/allVariables/{variable_id}")
+    public Variables getVariableById(@PathVariable(value="variable_id") Long variableId){return variableDAO.getVariable(variableId);}
+
 
     @GetMapping("/details")
     public Long getVariableDetails() {

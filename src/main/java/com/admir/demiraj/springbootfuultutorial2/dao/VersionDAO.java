@@ -9,12 +9,14 @@ import com.admir.demiraj.springbootfuultutorial2.repository.VersionsRepository;
 import com.admir.demiraj.springbootfuultutorial2.resources.Versions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 /**
  *
  * @author root
  */
 @Service
+@CrossOrigin(origins = "http://localhost:4200")
 public class VersionDAO {
     
     @Autowired

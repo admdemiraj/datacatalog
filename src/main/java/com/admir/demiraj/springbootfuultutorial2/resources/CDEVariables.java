@@ -24,7 +24,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @EntityListeners(AuditingEntityListener.class)
 public class CDEVariables{
 
-    public CDEVariables(@NotBlank String name, @NotBlank String csvFile, String value, String type, String unit, String canBeNull, String description, String comments) {
+    public CDEVariables(@NotBlank String name, @NotBlank String csvFile, String value, String type, String unit,
+                        String canBeNull, String description, String comments, String conceptPath, String label) {
         this.name = name;
         this.csvFile = csvFile;
         this.value = value;
@@ -33,6 +34,8 @@ public class CDEVariables{
         this.canBeNull = canBeNull;
         this.description = description;
         this.comments = comments;
+        this.conceptPath = conceptPath;
+        this.label = label;
     }
 
     public CDEVariables() {
@@ -67,7 +70,13 @@ public class CDEVariables{
 
     @Column
     private String comments;
-    
+
+    @Column
+    private String conceptPath;
+
+    @Column
+    private String label;
+
     @JsonBackReference
     @ManyToMany(fetch = FetchType.LAZY,cascade =  {CascadeType.PERSIST,CascadeType.MERGE})
     @JoinTable(name = "cdevariables_versions",joinColumns = { @JoinColumn(name = "cdevariable_id") },inverseJoinColumns = { @JoinColumn(name = "version_id") })
@@ -84,8 +93,23 @@ public class CDEVariables{
     public void setFunction(Functions function) {
         this.function = function;
     }
-    
-    
+
+    public String getConceptPath() {
+        return conceptPath;
+    }
+
+    public void setConceptPath(String conceptPath) {
+        this.conceptPath = conceptPath;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
     public Long getCdevariable_id() {
         return cdevariable_id;
     }

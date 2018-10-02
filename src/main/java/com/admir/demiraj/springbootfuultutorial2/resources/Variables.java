@@ -100,7 +100,6 @@ public class Variables implements Serializable{
     private Set<Versions> versions = new HashSet<>();
 
 
-
     public Set<Versions> getVersions() {
         return versions;
     }
@@ -169,9 +168,7 @@ public class Variables implements Serializable{
         return value;
     }
 
-    public void setValue(String value) {
-        this.value = value;
-    }
+    public void setValue(String value) { this.value = value; }
 
     public String getUnit() {
         return unit;
