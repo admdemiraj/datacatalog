@@ -9,11 +9,14 @@ import { HospitalVariablesComponent } from './shared/hospital-variables/hospital
 import {RouterModule, Routes} from "@angular/router";
 import {VariableByIdComponent} from "./components/variable-by-id/variable-by-id.component";
 import {AllVariablesComponent} from "./components/all-variables/all-variables.component";
+import {AppRoutingModule} from "./app-routing.module";
 
 @NgModule({
   declarations: [
     AppComponent,
-    HospitalVariablesComponent
+    HospitalVariablesComponent,
+    VariableByIdComponent,
+    AllVariablesComponent
   ],
   imports: [
 
@@ -29,7 +32,8 @@ import {AllVariablesComponent} from "./components/all-variables/all-variables.co
     MatToolbarModule,
     MatTabsModule,
     MatExpansionModule,
-    MatIconModule
+    MatIconModule,
+    AppRoutingModule
   ],
 
   providers: [HospitalService],

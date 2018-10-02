@@ -1,11 +1,6 @@
 import {Component, NgModule, OnInit} from '@angular/core';
 import { HospitalService } from '../../shared/hospital.service';
-import {AppModule} from '../../app.module';
 
-
-
-@NgModule({
-  imports: [HospitalService]})
 @Component({
   selector: 'app-all-variables',
   templateUrl: './all-variables.component.html',

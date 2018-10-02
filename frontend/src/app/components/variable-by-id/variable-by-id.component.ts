@@ -1,11 +1,10 @@
-import {Component, OnInit, Input, NgModule} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { HospitalService } from '../../shared/hospital.service';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import 'rxjs/add/operator/switchMap';
 
-@NgModule({
-  imports: [HospitalService]})
+
 @Component({
   selector: 'app-variable-by-id',
   templateUrl: './variable-by-id.component.html',
