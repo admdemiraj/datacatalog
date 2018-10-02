@@ -44,7 +44,7 @@ public class CDEVariableController {
     public List<CDEVariables> getAllCDEVariablesByVersion(@PathVariable(value="version_id") Long version_id){
         return cdeVariableDAO.findCDEVariablesByVersionId(version_id);
     }
-     //save a cde-variable
+     //save a cde-hospital
    
     //save variables
     @GetMapping("/save")

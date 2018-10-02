@@ -3,11 +3,15 @@ import { AllVariablesComponent } from './components/all-variables/all-variables.
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {HospitalService} from "./shared/hospital.service";
+import {VariablesByHospitalAndVersionIdComponentComponent} from "./components/variables-by-hospital-and-version-id-component/variables-by-hospital-and-version-id-component.component";
+import {GetAllHospitalsComponent} from "./components/get-all-hospitals/get-all-hospitals.component";
 
 const routes: Routes = [
   { path: '', redirectTo: '/hospital', pathMatch: 'full' },
   { path: 'hospital/:variable_id', component: VariableByIdComponent },
   { path: 'hospital',  component: AllVariablesComponent },
+  {path:'hospital/:hospital_id/variables/:version_id', component: VariablesByHospitalAndVersionIdComponentComponent},
+  {path:'hospitals/hosp', component: GetAllHospitalsComponent},
 ];
 
 @NgModule({

@@ -32,7 +32,7 @@ public class Springbootfuultutorial2Application {
 
     public static void main(String[] args) throws ParseException {
         SpringApplication.run(Springbootfuultutorial2Application.class, args);
-        //save a variable
+        //save a hospital
 
  /**
   *

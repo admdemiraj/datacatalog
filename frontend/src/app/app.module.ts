@@ -10,13 +10,17 @@ import {RouterModule, Routes} from "@angular/router";
 import {VariableByIdComponent} from "./components/variable-by-id/variable-by-id.component";
 import {AllVariablesComponent} from "./components/all-variables/all-variables.component";
 import {AppRoutingModule} from "./app-routing.module";
+import { VariablesByHospitalAndVersionIdComponentComponent } from './components/variables-by-hospital-and-version-id-component/variables-by-hospital-and-version-id-component.component';
+import { GetAllHospitalsComponent } from './components/get-all-hospitals/get-all-hospitals.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HospitalVariablesComponent,
     VariableByIdComponent,
-    AllVariablesComponent
+    AllVariablesComponent,
+    VariablesByHospitalAndVersionIdComponentComponent,
+    GetAllHospitalsComponent
   ],
   imports: [
 
