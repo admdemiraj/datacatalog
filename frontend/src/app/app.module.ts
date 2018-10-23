@@ -12,6 +12,9 @@ import {AllVariablesComponent} from "./components/all-variables/all-variables.co
 import {AppRoutingModule} from "./app-routing.module";
 import { VariablesByHospitalAndVersionIdComponentComponent } from './components/variables-by-hospital-and-version-id-component/variables-by-hospital-and-version-id-component.component';
 import { GetAllHospitalsComponent } from './components/get-all-hospitals/get-all-hospitals.component';
+import { GetVersionsPerVariableComponent } from './components/get-versions-per-variable/get-versions-per-variable.component';
+import { FormsModule } from '@angular/forms';
+import {LogService} from "./shared/log.service";
 
 @NgModule({
   declarations: [
@@ -20,13 +23,14 @@ import { GetAllHospitalsComponent } from './components/get-all-hospitals/get-all
     VariableByIdComponent,
     AllVariablesComponent,
     VariablesByHospitalAndVersionIdComponentComponent,
-    GetAllHospitalsComponent
+    GetAllHospitalsComponent,
+    GetVersionsPerVariableComponent
+
   ],
   imports: [
 
     BrowserModule,
     HttpClientModule,
-    BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
     MatButtonModule,
@@ -37,10 +41,11 @@ import { GetAllHospitalsComponent } from './components/get-all-hospitals/get-all
     MatTabsModule,
     MatExpansionModule,
     MatIconModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
 
-  providers: [HospitalService],
+  providers: [HospitalService, LogService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

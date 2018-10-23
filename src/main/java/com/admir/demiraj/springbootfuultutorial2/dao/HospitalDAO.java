@@ -8,7 +8,11 @@ package com.admir.demiraj.springbootfuultutorial2.dao;
 import com.admir.demiraj.springbootfuultutorial2.repository.HospitalsRepository;
 import com.admir.demiraj.springbootfuultutorial2.resources.Employees;
 import com.admir.demiraj.springbootfuultutorial2.resources.Hospitals;
+
+import java.math.BigInteger;
 import java.util.List;
+
+import com.admir.demiraj.springbootfuultutorial2.resources.Versions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -29,18 +33,21 @@ public class HospitalDAO {
     public Hospitals save(Hospitals hosp){
         return hospitalsRepository.save(hosp);
     }
-    
-    
+
+    public List<BigInteger> getAllHospitalIds(){return hospitalsRepository.getAllHospitalIds();}
     //show all hospitals
     
     public List<Hospitals> findAll(){
         return hospitalsRepository.findAll();
     }
+
     
     //get an hospital by id
     public Hospitals getHospital(Long id){
         return hospitalsRepository.getOne(id);
     }
+
+    public String getHospitalNameById(BigInteger hospId){return hospitalsRepository.getHospitalNameById(hospId);}
     
     //delete a hospital given it's id
    public void deleteEmployee(long id){

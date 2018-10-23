@@ -83,7 +83,13 @@ public class Versions implements Serializable{
         this.version_id = version_id;
     }
 
-   
+    public Set<CDEVariables> getCdevariables() {
+        return cdevariables;
+    }
+
+    public void setCdevariables(Set<CDEVariables> cdevariables) {
+        this.cdevariables = cdevariables;
+    }
 
     public String getName() {
         return name;

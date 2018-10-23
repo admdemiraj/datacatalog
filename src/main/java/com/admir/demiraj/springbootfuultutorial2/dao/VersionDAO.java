@@ -7,9 +7,13 @@ package com.admir.demiraj.springbootfuultutorial2.dao;
 
 import com.admir.demiraj.springbootfuultutorial2.repository.VersionsRepository;
 import com.admir.demiraj.springbootfuultutorial2.resources.Versions;
+import jdk.nashorn.internal.runtime.Version;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
+
+import java.math.BigInteger;
+import java.util.List;
 
 /**
  *
@@ -26,9 +30,16 @@ public class VersionDAO {
         return versionsRepository.save(ver);
     }
     
-    public Versions getVersionById(Long versionId){
-        return versionsRepository.getOne(versionId);
+    public Versions getVersionById(BigInteger versionId){ return versionsRepository.getVersionById(versionId); }
+
+    public List<Versions> getAllVersions(){ return versionsRepository.findAll(); }
+
+    public List<Versions> getAllVersionsByVariableId(Long variableId){
+        return versionsRepository.getAllVersionByVariableId(variableId);
     }
-    
+    public List<BigInteger> getAllVersionIdsByHospitalId(BigInteger hospitalId){
+        return versionsRepository.getAllVersionByHospitalId(hospitalId);
+    }
+public Versions getOne(Long verId){return versionsRepository.getOne(verId);}
     
 }

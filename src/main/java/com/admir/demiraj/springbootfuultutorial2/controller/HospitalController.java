@@ -9,6 +9,8 @@ import com.admir.demiraj.springbootfuultutorial2.dao.HospitalDAO;
 import com.admir.demiraj.springbootfuultutorial2.resources.Hospitals;
 import java.util.List;
 import javax.validation.Valid;
+
+import com.admir.demiraj.springbootfuultutorial2.resources.Versions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,6 +31,7 @@ public class HospitalController {
     public List<Hospitals> getAllHospitals(){
         return hospitalDAO.findAll();
     }
+
     
      //save a hospital to database
     @PostMapping("/hosp")

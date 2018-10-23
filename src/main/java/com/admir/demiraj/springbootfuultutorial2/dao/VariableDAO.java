@@ -32,7 +32,9 @@ public class VariableDAO {
     private VersionDAO versionDao;
     
     
-
+    public List<Variables> findVariablesByVersionId(Long versionId){
+        return variablesRepository.findVariablesByVersionId(versionId);
+    }
 
     public void saveVersionToVariable(Variables var, Versions ver){
         var.setVersions(ver);
@@ -62,7 +64,7 @@ public class VariableDAO {
        List<Variables> variablesByVersion = new ArrayList();
    
        for(Variables v : allVariables){
-           if(v.getVersions().contains(versionDao.getVersionById(versionId))){
+           if(v.getVersions().contains(versionDao.getOne(versionId))){
            variablesByVersion.add(v);
            }
        }

@@ -25,7 +25,14 @@ public interface VariablesRepository extends JpaRepository<Variables, Long>{
             + "INNER JOIN versions ver ON ver.version_id = vv.version_id "
             + "WHERE vv.version_id = version_id AND v.hospital.hospital_id = hospital_id ",nativeQuery=true )
     public List<Variables> findVariablesByHospitalIdAndVersion(@Param("hospital_id")Long hospitalId, @Param("version_id")Long versionId);
-    
+
+
+    @Query(value = "SELECT * FROM variables v "
+            + "INNER JOIN variables_versions vv ON v.variable_id = vv.variable_id "
+            + "INNER JOIN versions ver ON ver.version_id = vv.version_id "
+            + "WHERE vv.version_id = ?1",nativeQuery=true )
+    public List<Variables> findVariablesByVersionId(Long versionId);
+
     // I may need to select the functions as well in order to print one mapping for each one of them
     @Query(value= "SELECT * FROM variables v "
             + "INNER JOIN variables_functions vf ON v.variable_id = vf.variable_id "

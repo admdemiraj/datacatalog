@@ -53,6 +53,17 @@ public class VersionsVariablesController {
     @GetMapping("/allVariables/{variable_id}")
     public Variables getVariableById(@PathVariable(value="variable_id") Long variableId){return variableDAO.getVariable(variableId);}
 
+    @GetMapping("/variablesByVersion/{version_id}")
+    public List<Variables> getVariableByVersionId(@PathVariable(value="version_id") Long versionId){return variableDAO.findVariablesByVersionId(versionId);}
+
+    @GetMapping("/allVersions")
+    public List<Versions> getAllVerions(){return versionDAO.getAllVersions();}
+
+
+    @GetMapping("/versionsPerVariable/{variable_id}")
+    public List<Versions> getAllVersionsByVariableId(@PathVariable(value = "variable_id") Long variableId){
+        return versionDAO.getAllVersionsByVariableId(variableId);
+    }
 
     @GetMapping("/details")
     public Long getVariableDetails() {
@@ -108,7 +119,6 @@ public class VersionsVariablesController {
             variableDAO.saveVersionToVariable(var, ver2);
             variableDAO.saveHospitalToVariable(var, hosp);
             variableDAO.save(var);
-
         }
 
 //NIGUARDA

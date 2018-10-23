@@ -11,11 +11,21 @@ p{
 
 }
 
-.mat-tab-group {
-  background-color: pink;
+.mat-tab-label{
+  font-size: xx-large;
+  color: lightsalmon;
   font-weight: bolder;
-  font-size: larger;
-  border-color: black;
+
+}
+
+.mat-tab-group {
+  background-color: floralwhite;
+}
+
+.mat-expansion-panel-header-title{
+  font-weight: bold;
+  font-size: large;
+  color: green;
 }
 
 
